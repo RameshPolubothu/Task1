@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './Gifs.css'
 const Gifs = () => {
     const [query, setQuery] = useState('');
     const [data, setData] = useState(null);
@@ -26,18 +27,19 @@ const Gifs = () => {
     return (
         
         <div>
-            <div>
-                <input
+            <div style={{margin:20}}>
+                <input 
                     type="search"
                     value={query}
                     onChange={(e) => (setQuery(e.target.value))}
                     placeholder="Search for GIFs"
                 />
             </div>
+
             {data ? (
                 <div>
                     {data.map((gif) => (
-                        <img key={gif.id} src={gif.images.fixed_height.url} alt={gif.title} />
+                        <img className="gallery" key={gif.id} src={gif.images.fixed_height.url} alt={gif.title} />
                     ))}
                 </div>
             ) : (
