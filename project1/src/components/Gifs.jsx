@@ -55,7 +55,7 @@ const Gifs = () => {
                 />
             </div>
             {currentRecords ? (
-                <div className="gallery">
+                <div className="gallery border">
                     {currentRecords.map((gif) => (
                         <div key={gif.id} className="gif-container">
                         <img src={gif.images.fixed_height.url} alt={gif.title} />
