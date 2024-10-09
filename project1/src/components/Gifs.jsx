@@ -4,7 +4,7 @@ import Pagination from './Pagination';
 const Gifs = () => {
     const [query, setQuery] = useState('');
     const [data, setData] = useState([]);
-    // console.log(data.length);
+    const [favorites, setFavorites] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [recordsPerPage] = useState(5);
 
@@ -36,6 +36,13 @@ const Gifs = () => {
             console.error('Error fetching data:', error.message);
         }
     };
+    const toggleFavorite = (gif) =>{
+        if (favorites.includes(gif.id)) {
+            setFavorites(favorites.filter(id => id !== gif.id)); 
+        } else {
+            setFavorites([...favorites, gif.id]); 
+        }
+    }
     return (
         
         <div>
@@ -50,7 +57,12 @@ const Gifs = () => {
             {currentRecords ? (
                 <div className="gallery">
                     {currentRecords.map((gif) => (
-                        <img key={gif.id} src={gif.images.fixed_height.url} alt={gif.title} />
+                        <div key={gif.id} className="gif-container">
+                        <img src={gif.images.fixed_height.url} alt={gif.title} />
+                        <button onClick={() => toggleFavorite(gif)}>
+                                {favorites.includes(gif.id) ? 'Unmark Favorite' : 'Mark as Favorite'}
+                        </button>
+                        </div>
                     ))}
                 </div>
             ) : (
@@ -61,7 +73,14 @@ const Gifs = () => {
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
             />
-            
+            <div>
+                <h2>Favorite GIFs</h2>
+                <div className="gallery">
+                    {currentRecords?.filter(gif => favorites.includes(gif.id)).map((gif) => (
+                        <img key={gif.id} src={gif.images.fixed_height.url} alt={gif.title} />
+                    ))}
+                </div>
+            </div>
         </div>
     );
 };
