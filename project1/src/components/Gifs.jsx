@@ -6,7 +6,7 @@ const Gifs = () => {
     const [data, setData] = useState([]);
     const [favorites, setFavorites] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [recordsPerPage] = useState(5);
+    const [recordsPerPage] = useState(20);
 
     const indexOfLastRecord = currentPage * recordsPerPage;
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
@@ -59,7 +59,12 @@ const Gifs = () => {
                     {currentRecords.map((gif) => (
                         <div key={gif.id} className="gif-container">
                         <img src={gif.images.fixed_height.url} alt={gif.title} />
-                        <button onClick={() => toggleFavorite(gif)}>
+                        <button onClick={() => toggleFavorite(gif)}
+                        style={{
+                                    backgroundColor: favorites.includes(gif.id) ? 'yellow' : '',
+                                    color: favorites.includes(gif.id) ? 'black' : 'initial',
+                                }} 
+                        >
                                 {favorites.includes(gif.id) ? 'Unmark Favorite' : 'Mark as Favorite'}
                         </button>
                         </div>
@@ -76,7 +81,7 @@ const Gifs = () => {
             <div>
                 <h2>Favorite GIFs</h2>
                 <div className="gallery">
-                    {currentRecords?.filter(gif => favorites.includes(gif.id)).map((gif) => (
+                    {data?.filter(gif => favorites.includes(gif.id)).map((gif) => (
                         <img key={gif.id} src={gif.images.fixed_height.url} alt={gif.title} />
                     ))}
                 </div>
