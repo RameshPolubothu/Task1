@@ -6,7 +6,7 @@ const Gifs = () => {
     const [data, setData] = useState([]);
     // console.log(data.length);
     const [currentPage, setCurrentPage] = useState(1);
-    const [recordsPerPage] = useState(20);
+    const [recordsPerPage] = useState(5);
 
     const indexOfLastRecord = currentPage * recordsPerPage;
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;

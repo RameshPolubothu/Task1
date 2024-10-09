@@ -1,24 +1,23 @@
 import React from 'react';
-
+import './Page.css'
 const Pagination = (props) => {
     const pageNumbers = [...Array(props.nPages + 1).keys()].slice(1);
     const goToNextPage = () => {
-        if(currentPage !== nPages) 
-            setCurrentPage(currentPage + 1)
+        if(props.currentPage !== nPages) 
+            setCurrentPage(props.currentPage + 1)
     }
     const goToPrevPage = () => {
-        if(currentPage !== 1) 
-            setCurrentPage(currentPage - 1)
+        if(props.currentPage !== 1) 
+            props.setCurrentPage(props.currentPage - 1)
     }
     return (
         <div>
-            <nav>
-            <ul className='navbar pagination justify-content-center fixed'>
+            <nav className="navbar">
+            <ul className="navbar-center">
                 <li className="page-item"> {/* Previous page button */}
                     <a className="page-link" 
                         onClick={goToPrevPage}  // Click event handler for navigating to previous page
                         href='#'>
-                        
                         Previous
                     </a>
                 </li>
